@@ -1,0 +1,192 @@
+DSA LAB:
+OBJECTIVE:ARRAYS
+Question:1
+Write a program to transverse a array?
+
+#include <iostream>
+
+int main() {
+    
+    int array[] = {1, 2, 3, 4, 5};
+    
+    
+    int size = sizeof(array) / sizeof(array[0]);
+
+   
+    for (int i = 0; i < size; i++) {
+        std::cout << array[i] << std::endl;
+    }
+
+    return 0;
+}
+
+Question:2
+Write a program to insert elements at beginning , end and at specified location of array ?
+
+#include <iostream>
+using namespace std;
+
+void insertAtBeginning(int arr[], int &size, int element) {
+    // Shift elements to the right
+    for (int i = size; i > 0; i--) {
+        arr[i] = arr[i - 1];
+    }
+    arr[0] = element;  // Insert the new element at the beginning
+    size++;
+}
+
+void insertAtEnd(int arr[], int &size, int element) {
+    arr[size] = element;  // Insert the new element at the end
+    size++;
+}
+
+void insertAtPosition(int arr[], int &size, int element, int position) {
+    if (position < 0 || position > size) {
+        cout << "Invalid position!" << endl;
+        return;
+    }
+
+    // Shift elements to the right
+    for (int i = size; i > position; i--) {
+        arr[i] = arr[i - 1];
+    }
+    arr[position] = element;  // Insert the new element at the specified position
+    size++;
+}
+
+void displayArray(int arr[], int size) {
+    for (int i = 0; i < size; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+}
+
+int main() {
+    const int MAX_SIZE = 100;  // Maximum size of the array
+    int arr[MAX_SIZE];
+    int size = 0;  // Current size of the array
+
+    // Inserting elements
+    insertAtEnd(arr, size, 10);
+    insertAtEnd(arr, size, 20);
+    insertAtEnd(arr, size, 30);
+    
+    cout << "Array after inserting at end: ";
+    displayArray(arr, size);
+
+    insertAtBeginning(arr, size, 5);
+    cout << "Array after inserting at beginning: ";
+    displayArray(arr, size);
+
+    insertAtPosition(arr, size, 15, 2);
+    cout << "Array after inserting 15 at position 2: ";
+    displayArray(arr, size);
+
+    return 0;
+}
+
+
+QUESTION:3
+Develop the function that takes input for an array at run time ?
+
+#include <iostream>
+using namespace std;
+
+// Function to take input for an array
+void inputArray(int arr[], int size) {
+    cout << "Enter " << size << " elements for the array:" << endl;
+    for (int i = 0; i < size; i++) {
+        cout << "Element " << i + 1 << ": ";
+        cin >> arr[i];
+    }
+}
+
+// Function to display the array
+void displayArray(int arr[], int size) {
+    cout << "Array elements are: ";
+    for (int i = 0; i < size; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+}
+
+QUESTION:4
+Write a program to delete elements from beginning, end and at specified location of array ?
+
+#include <iostream>
+#include <vector>
+
+void deleteFromBeginning(std::vector<int>& arr) {
+    if (!arr.empty()) {
+        arr.erase(arr.begin());
+    } else {
+        std::cout << "Array is empty. Cannot delete from beginning." << std::endl;
+    }
+}
+
+void deleteFromEnd(std::vector<int>& arr) {
+    if (!arr.empty()) {
+        arr.pop_back();
+    } else {
+        std::cout << "Array is empty. Cannot delete from end." << std::endl;
+    }
+}
+
+void deleteFromPosition(std::vector<int>& arr, int pos) {
+    if (pos < 0 || pos >= arr.size()) {
+        std::cout << "Invalid position. Cannot delete." << std::endl;
+    } else {
+        arr.erase(arr.begin() + pos);
+    }
+}
+
+void displayArray(const std::vector<int>& arr) {
+    std::cout << "Current array: ";
+    for (int val : arr) {
+        std::cout << val << " ";
+    }
+    std::cout << std::endl;
+}
+
+QUESTION:5
+Develop the function that copy two arrays in third array and merges them in C++?
+
+#include <iostream>
+#include <vector>
+
+void mergeArrays(const std::vector<int>& arr1, const std::vector<int>& arr2, std::vector<int>& mergedArray) {
+    mergedArray.clear(); // Clear the merged array if it already has contents
+
+    // Copy elements from the first array
+    for (int element : arr1) {
+        mergedArray.push_back(element);
+    }
+
+    // Copy elements from the second array
+    for (int element : arr2) {
+        mergedArray.push_back(element);
+    }
+}
+
+void displayArray(const std::vector<int>& arr) {
+    for (int val : arr) {
+        std::cout << val << " ";
+    }
+    std::cout << std::endl;
+}
+
+int main() {
+    // Example input arrays
+    std::vector<int> arr1 = {1, 2, 3, 4, 5};
+    std::vector<int> arr2 = {6, 7, 8, 9, 10};
+    std::vector<int> mergedArray;
+
+    // Merge the arrays
+    mergeArrays(arr1, arr2, mergedArray);
+
+    // Display the merged array
+    std::cout << "Merged Array: ";
+    displayArray(mergedArray);
+
+    return 0;
+}
